@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def home():
 
 
 @app.route("/contatos_duvidas")
-def contatos():
+def contacts():
     return render_template('contacts.html')
 
 
