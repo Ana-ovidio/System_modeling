@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block bory %}
+    <div class="container">
+        <h1>Usuários</h1>
+        {% for user in set_users %}
+            <p>{{user}}</p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}
