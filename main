@@ -10,7 +10,7 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/contatos_duvidas")
+@app.route("/contacts")
 def contacts():
     return render_template('contacts.html')
 
@@ -19,6 +19,9 @@ def contacts():
 def users():
     return render_template('users.html', set_users=set_users)
 
+@app.route("/register_login")
+def register_login():
+    return render_template('register_login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
