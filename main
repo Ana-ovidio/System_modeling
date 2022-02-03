@@ -1,6 +1,9 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+
+from forms import FormCreateAccount, FormLogin
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'ca79946617c662a483d0a5f0f1a179af'
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
 
@@ -19,9 +22,13 @@ def contacts():
 def users():
     return render_template('users.html', set_users=set_users)
 
+
 @app.route("/register_login")
 def register_login():
-    return render_template('register_login.html')
+    ca = FormCreateAccount()
+    cl = FormLogin()
+    return render_template('register_login.html', ca=ca, cl=cl)
 
-if __name__ == '__main__':
+
+if "__main__" == __name__:
     app.run(debug=True)

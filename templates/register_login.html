@@ -1,9 +1,65 @@
 {% extends 'base.html' %}
 
 {% block bory %}
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <h1>Crie uma conta ou faça login para continuar</h1>
+        <hr>
+        <div class="row">
 
-    registro + login
+            <div class="col">
+                <form method="POST" action="" class="border p-4 m-5">
+                    <legend><strong>Login</strong></legend>
+                    <fieldset>
+                        <div class = "form-group">
+                            <div class="input-group">
+                                <div class="input-group-text">@</div>
+                                <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class = 'form-group'>
+                            {{cl.password.label (class="form-control-label")}}
+                            {{cl.password (class="form-control mt-0.5 ")}}
+                        </div>
+                        <div class = 'form-group'>
+                            {{cl.remember_password.label(class="form-check-label")}}
+                            {{cl.remember_password(class="form-check-input ")}}
+                        </div>
+                    </fieldset>
+                    {{cl.button_submit_login (class="btn btn-dark btn-sm mt-2")}}
+                </form>
+            </div>
 
+
+            <div class="col">
+                <form method="POST" action="" class="border p-4 m-5">
+                    <legend><strong>Cadastro</strong></legend>
+                    <fieldset>
+                        <div class = "form-group">
+                            <div class="input-group">
+                                <div class="input-group-text">@</div>
+                                <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class = 'form-group'>
+                            {{ca.email.label (class="form-control-label")}}
+                            {{ca.email (class="form-control mt-0.5 ")}}
+                        </div>
+                        <div class = 'form-group'>
+                            {{ca.password.label (class="form-control-label")}}
+                            {{ca.password (class="form-control mt-0.5 ")}}
+                        </div>
+                        <div class = 'form-group'>
+                            {{cl.password.label (class="form-control-label")}}
+                            {{cl.password (class="form-control mt-0.5 ")}}
+                        </div>
+                        <div class = 'form-group'>
+                            {{ca.confirmation_password.label (class="form-control-label")}}
+                            {{ca.confirmation_password (class="form-control mt-0.5 ")}}
+                        </div>
+                    </fieldset>
+                    {{ca.button_submit_create_account (class="btn btn-dark btn-sm mt-2")}}
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
