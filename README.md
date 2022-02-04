@@ -14,6 +14,12 @@
       conda activate system_modeling_env
 ```
 
+- Instalando dependencias
+
+```commandline
+    python install -r requirements.txt
+```
+
 # # ***System_modeling***
 
 Modelagem de sistemas através da criação de um site. 
