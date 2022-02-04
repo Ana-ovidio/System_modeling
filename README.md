@@ -1,3 +1,19 @@
+# System Modeling
+
+## Requisitos
+
+- Crie um ambiente utilizando o conda
+
+```
+      conda create -n system_modeling_env python=3.8
+```
+
+- Ativar o ambiente
+
+```
+      conda activate system_modeling_env
+```
+
 # # ***System_modeling***
 
 Modelagem de sistemas através da criação de um site. 
