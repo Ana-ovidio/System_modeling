@@ -8,6 +8,7 @@
 
             <div class="col">
                 <form method="POST" action="" class="border p-4 m-5">
+                    {{form_login.csrf_token}}
                     <legend><strong>Login</strong></legend>
                     <fieldset>
                         <div class = "form-group">
@@ -16,22 +17,50 @@
                                 <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
                             </div>
                         </div>
+
+
                         <div class = 'form-group'>
-                            {{cl.password.label (class="form-control-label")}}
-                            {{cl.password (class="form-control mt-0.5 ")}}
+                            {{form_login.email.label (class="form-control-label")}}
+                            {% if form_login.email.errors %}
+                            {{form_login.email (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_login.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_login.email (class="form-control mt-0.5 ")}}
+                            {% endif %}
+                        </div>
+
+
+                        <div class = 'form-group'>
+                            {{form_login.password.label (class="form-control-label")}}
+                            {% if form_login.password.errors %}
+                            {{form_login.password (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_login.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_login.password (class="form-control mt-0.5 ")}}
+                            {% endif %}
+
                         </div>
                         <div class = 'form-group'>
-                            {{cl.remember_password.label(class="form-check-label")}}
-                            {{cl.remember_password(class="form-check-input ")}}
+                            {{form_login.remember_password.label(class="form-check-label")}}
+                            {{form_login.remember_password(class="form-check-input ")}}
                         </div>
                     </fieldset>
-                    {{cl.button_submit_login (class="btn btn-dark btn-sm mt-2")}}
+                    {{form_login.button_submit_login (class="btn btn-dark btn-sm mt-2")}}
                 </form>
             </div>
 
 
             <div class="col">
                 <form method="POST" action="" class="border p-4 m-5">
+                    {{form_account.csrf_token}}
                     <legend><strong>Cadastro</strong></legend>
                     <fieldset>
                         <div class = "form-group">
@@ -40,24 +69,67 @@
                                 <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Username">
                             </div>
                         </div>
+                        
                         <div class = 'form-group'>
-                            {{ca.email.label (class="form-control-label")}}
-                            {{ca.email (class="form-control mt-0.5 ")}}
+                            {{form_account.complete_name.label (class="form-control-label")}}
+                            {% if form_account.complete_name.errors %}
+                            {{form_account.complete_name (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_account.complete_name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_account.complete_name (class="form-control mt-0.5 ")}}
+                            {% endif %}
                         </div>
+                        
+                        
                         <div class = 'form-group'>
-                            {{ca.password.label (class="form-control-label")}}
-                            {{ca.password (class="form-control mt-0.5 ")}}
+                            {{form_account.email.label (class="form-control-label")}}
+                            {% if form_account.email.errors %}
+                            {{form_account.email (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_account.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_account.email (class="form-control mt-0.5 ")}}
+                            {% endif %}
                         </div>
+                        
+                        
                         <div class = 'form-group'>
-                            {{cl.password.label (class="form-control-label")}}
-                            {{cl.password (class="form-control mt-0.5 ")}}
+                            {{form_account.password.label (class="form-control-label")}}
+                            {% if form_account.password.errors %}
+                            {{form_account.password (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_account.password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_account.password (class="form-control mt-0.5 ")}}
+                            {% endif %}
                         </div>
+                        
+                        
                         <div class = 'form-group'>
-                            {{ca.confirmation_password.label (class="form-control-label")}}
-                            {{ca.confirmation_password (class="form-control mt-0.5 ")}}
+                            {{form_account.confirmation_password.label (class="form-control-label")}}
+                            {% if form_account.confirmation_password.errors %}
+                            {{form_account.confirmation_password (class="form-control is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_account.confirmation_password.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_account.confirmation_password (class="form-control mt-0.5 ")}}
+                            {% endif %}
                         </div>
                     </fieldset>
-                    {{ca.button_submit_create_account (class="btn btn-dark btn-sm mt-2")}}
+                    {{form_account.button_submit_create_account (class="btn btn-dark btn-sm mt-2")}}
                 </form>
             </div>
         </div>
