@@ -16,6 +16,6 @@ class Post(data_base.Model):
     id = data_base.Column(data_base.Integer, primary_key=True)
     title = data_base.Column(data_base.String, nullable=False)
     bory_text = data_base.Column(data_base.Text, nullable=False)
-    date_creation = data_base.Column(data_base.Datetime, nullable=False, default=datetime.utcnow)
+    date_creation = data_base.Column(data_base.DateTime, default=datetime.utcnow, nullable=False)
     id.user = data_base.Column(data_base.Integer, data_base.ForeignKey('user.id'), nullable=False)
 
