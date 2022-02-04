@@ -5,7 +5,7 @@
 - Crie um ambiente utilizando o conda
 
 ```
-      conda create -n system_modeling_env python=3.8
+      conda create -n system_modeling_env python=3.9
 ```
 
 - Ativar o ambiente
@@ -17,7 +17,7 @@
 - Instalando dependencias
 
 ```commandline
-    python install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 # # ***System_modeling***
