@@ -6,7 +6,6 @@ from flask_login import login_user
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
 
-
 @app.route("/")
 def home():
     return render_template('home.html')
