@@ -3,8 +3,8 @@ from flask_wtf import FlaskForm
 # Associated with fields
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 # Restriction of same fields to users
-from wtforms.validators import DataRequired, Length, Email, EqualTo
-
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from general_system.models import Usuario
 
 class FormCreateAccount(FlaskForm):
     username = StringField('Nome de usuário:', validators=[DataRequired()])
@@ -13,6 +13,10 @@ class FormCreateAccount(FlaskForm):
     confirmation_password = PasswordField('Confirmar senha:', validators=[DataRequired(), EqualTo('password')])
     button_submit_account = SubmitField('Criar uma conta')
 
+    def validate_email(self, email):
+        usuario = Usuario.query.filter_by(email=email.data).first()
+        if usuario:
+            raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça login para continuar')
 
 class FormLogin(FlaskForm):
     username = StringField('Usuário:', validators=[DataRequired()])
