@@ -19,7 +19,6 @@ class FormCreateAccount(FlaskForm):
             raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça login para continuar')
 
 class FormLogin(FlaskForm):
-    username = StringField('Usuário:', validators=[DataRequired()])
     email = StringField('E-mail:', validators=[DataRequired(), Email()])
     password = PasswordField('Senha:', validators=[DataRequired(), Length(6, 20)])
     remember_password = BooleanField('Aceita relembrar os dados de acesso')

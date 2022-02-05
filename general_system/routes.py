@@ -2,6 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
 from general_system.forms import FormCreateAccount, FormLogin
 from general_system.models import Usuario
+from flask_login import login_user
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
 
@@ -35,7 +36,12 @@ def register_login():
         return redirect(url_for('home'))
 
     if form_login.validate_on_submit() and "button_submit_login" in request.form:
-        flash(f'Login de {form_login.username.data} feito.', 'alert-success')
-        return redirect(url_for('home'))
+        usuario = Usuario.query.filter_by(email=form_login.email.data).first()
+        if usuario and bcrypt.check_password_hash(usuario.password, form_login.password.data):
+            login_user(usuario, remember=form_login.remember_password.data)
+            flash(f'Login feito com sucesso no e-mail: {form_login.email.data}', 'alert-success')
+            return redirect(url_for('home'))
+        else:
+            flash(f'Falha no Login. E-mail ou Senha Incorretos', 'alert-danger')
 
     return render_template('register_login.html', form_account=form_account, form_login=form_login)

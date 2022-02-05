@@ -1,8 +1,13 @@
-from general_system import data_base
+from general_system import data_base, login_manager
 from datetime import datetime
+from flask_login import UserMixin
 
 
-class Usuario(data_base.Model):
+@login_manager.user_loader
+def load_user(id_user):
+    return Usuario.query.get(int(id_user))
+
+class Usuario(data_base.Model, UserMixin):
     id = data_base.Column(data_base.Integer, primary_key=True)
     username = data_base.Column(data_base.String, nullable=False)
     email = data_base.Column(data_base.String, nullable=False, unique=True)
