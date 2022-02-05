@@ -3,6 +3,8 @@ from datetime import datetime
 
 
 class User(data_base.Model):
+    __tablename__ = "user"
+    __table_args__ = {'extend_existing': True}
     id = data_base.Column(data_base.Integer, primary_key=True)
     username = data_base.Column(data_base.String, nullable=False)
     email = data_base.Column(data_base.String, nullable=False, unique=True)
@@ -13,6 +15,8 @@ class User(data_base.Model):
 
 
 class Post(data_base.Model):
+    __tablename__ = "post"
+    __table_args__ = {'extend_existing': True}
     id = data_base.Column(data_base.Integer, primary_key=True)
     title = data_base.Column(data_base.String, nullable=False)
     bory_text = data_base.Column(data_base.Text, nullable=False)
