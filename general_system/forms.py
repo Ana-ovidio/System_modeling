@@ -8,12 +8,10 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class FormCreateAccount(FlaskForm):
     username = StringField('Nome de usuário:', validators=[DataRequired()])
-    complete_name = StringField('Nome completo:', validators=[DataRequired()])
     email = StringField('E-mail:', validators=[DataRequired(), Email()])
     password = PasswordField('Senha:', validators=[DataRequired(), Length(6, 20)])
-    confirmation_password = PasswordField('Confirmar senha:', validators=[DataRequired(),
-                                                                          EqualTo('password')])
-    button_submit_create_account = SubmitField('Criar uma conta')
+    confirmation_password = PasswordField('Confirmar senha:', validators=[DataRequired(), EqualTo('password')])
+    button_submit_account = SubmitField('Criar uma conta')
 
 
 class FormLogin(FlaskForm):

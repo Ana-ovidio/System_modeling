@@ -1,4 +1,4 @@
-from main import data_base
+from general_system import data_base
 from datetime import datetime
 
 
@@ -18,4 +18,3 @@ class Post(data_base.Model):
     bory_text = data_base.Column(data_base.Text, nullable=False)
     date_creation = data_base.Column(data_base.DateTime, default=datetime.utcnow, nullable=False)
     id.user = data_base.Column(data_base.Integer, data_base.ForeignKey('user.id'), nullable=False)
-
