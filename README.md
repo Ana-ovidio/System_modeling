@@ -1,4 +1,4 @@
-# System Modeling
+# **System Modeling**
 
 ## Requisitos
 
@@ -20,7 +20,7 @@
     pip install -r requirements.txt
 ```
 
-# # ***System_modeling***
+--------
 
 Modelagem de sistemas através da criação de um site. 
 
@@ -30,3 +30,23 @@ O projeto será construido através de dois métodos:
       2- Back end: Flask (Python)
 
 O intuito será realizar uma integração com o banco de dados, na qual os usuários poderão se cadastrar e realizar login no site. 
+
+---------
+
+### Comandos necessários para o banco de dados. 
+
+** No Python Console:**
+
+                  from general_system import data_base
+                  from general_system.models import Ususario
+                  
+                  Usuario.query.all() #Verificar os usuários que estão na base de dados. 
+                
+                  # Quando desejar buscar um usuário específico.
+                  usuario = Usuario.query.filter_by(email='nome_do_email_de_cadastro').first()
+                  usuario.email
+                  usuario.password
+                  usuario.username
+                  # Quando desejar buscar um usuário específio pelo id (primmary_key).
+                  usuario - Usuario.query.get(int('id'))
+                  
