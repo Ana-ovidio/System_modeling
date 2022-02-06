@@ -1,13 +1,17 @@
 """
 home, contacts, users - Associated with the main pages. These functions are statics.
 register_login - Associated with pages if the user is not logged in the site.
+logout, my_profile, create_posts - Associated with restrict pages. A person just access if it has done the login.
+
+Ps: current_user is not used in this module. But it is necessary import it to use in the navbar.
+
 """
 
 from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
 from general_system.forms import FormCreateAccount, FormLogin
 from general_system.models import Usuario
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
 
@@ -23,6 +27,7 @@ def contacts():
 
 
 @app.route("/users")
+@login_required
 def users():
     return render_template('users.html', set_users=set_users)
 
@@ -54,6 +59,7 @@ def register_login():
 
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
     flash(f'Logout realizado com sucesso', 'alert-success')
@@ -61,10 +67,12 @@ def logout():
 
 
 @app.route("/my_profile")
+@login_required
 def my_profile():
     return render_template('my_profile.html')
 
 
 @app.route("/post/create")
+@login_required
 def create_post():
     return render_template('create_posts.html')

@@ -9,7 +9,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///DataBase_modeling_systems.db'
 
 data_base = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+
+# Create messages associated with login
 login_manager = LoginManager(app)
+login_manager.login_view = 'register_login'
+login_manager.login_message_category = 'alert-info'
+login_manager.login_message = 'Faça o Login para prosseguir'
 
 # it is necessary app to routes work correctly.
 from general_system import routes
