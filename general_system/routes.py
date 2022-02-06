@@ -1,10 +1,16 @@
+"""
+home, contacts, users - Associated with the main pages. These functions are statics.
+register_login - Associated with pages if the user is not logged in the site.
+"""
+
 from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
 from general_system.forms import FormCreateAccount, FormLogin
 from general_system.models import Usuario
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
+
 
 @app.route("/")
 def home():
@@ -28,7 +34,8 @@ def register_login():
 
     if form_account.validate_on_submit() and "button_submit_account" in request.form:
         password_encrypted = bcrypt.generate_password_hash(form_account.password.data)
-        people = Usuario(username=form_account.username.data, email=form_account.email.data,password=password_encrypted)
+        people = Usuario(username=form_account.username.data, email=form_account.email.data,
+                         password=password_encrypted)
         data_base.session.add(people)
         data_base.session.commit()
         flash(f'Cadastro de {form_account.username.data} realizado com sucesso.', 'alert-success')
@@ -44,3 +51,20 @@ def register_login():
             flash(f'Falha no Login. E-mail ou Senha Incorretos', 'alert-danger')
 
     return render_template('register_login.html', form_account=form_account, form_login=form_login)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    flash(f'Logout realizado com sucesso', 'alert-success')
+    return redirect(url_for('home'))
+
+
+@app.route("/my_profile")
+def my_profile():
+    return render_template('my_profile.html')
+
+
+@app.route("/post/create")
+def create_post():
+    return render_template('create_posts.html')
