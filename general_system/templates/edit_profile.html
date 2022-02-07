@@ -7,7 +7,7 @@
         <div class="row">
 
             <div class="col">
-                <form method="POST" action="" class="border p-3 m-5">
+                <form method="POST" action="" class="border p-3 m-5" enctype="multipart/form-data">
                     {{form_profile.csrf_token}}
                     <legend><strong>Editar perfil</strong></legend>
                     <fieldset>
@@ -36,6 +36,16 @@
                             </div>
                             {% else %}
                                 {{form_profile.email (class="form-control form-control-sm mt-0.5 ")}}
+                            {% endif %}
+                        </div>
+                        <!-- Photo field  -->
+                        <div class="form-group">
+                            {{ form_profile.photo_profile.label }}
+                            {{ form_profile.photo_profile(class="form-control-file") }}
+                            {% if form_profile.photo_profile.errors %}
+                                {% for error in form_profile.photo_profile.errors %}
+                                    <span class="text-danger">{{ error }}</span><br>
+                                {% endfor %}
                             {% endif %}
                         </div>
                         
