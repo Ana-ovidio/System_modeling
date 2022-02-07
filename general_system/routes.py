@@ -74,7 +74,8 @@ def logout():
 @app.route("/my_profile")
 @login_required
 def my_profile():
-    return render_template('my_profile.html')
+    image_id = url_for('static', filename='photo_profile/{}'.format(current_user.perf_photo))
+    return render_template('my_profile.html', image_id=image_id)
 
 
 @app.route("/post/create")
