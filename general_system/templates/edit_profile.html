@@ -1,0 +1,49 @@
+{% extends 'my_profile.html' %}
+
+{% block form_edit_profile%}
+
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <hr>
+        <div class="row">
+
+            <div class="col">
+                <form method="POST" action="" class="border p-3 m-5">
+                    {{form_profile.csrf_token}}
+                    <legend><strong>Editar perfil</strong></legend>
+                    <fieldset>
+                        <div class = 'form-group'>
+                            {{form_profile.username.label (class="form-control-label")}}
+                            {% if form_profile.username.errors %}
+                            {{form_profile.username (class="form-control form-control-sm is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_profile.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_profile.username (class="form-control form-control-sm mt-0.5 ")}}
+                            {% endif %}
+                        </div>
+
+                        <div class = 'form-group'>
+                            {{form_profile.email.label (class="form-control-label")}}
+                            {% if form_profile.email.errors %}
+                            {{form_profile.email (class="form-control form-control-sm is-invalid mt-0.5 ")}}
+                            <div class="invalid-feedback">
+                                {% for error in form_profile.email.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{form_profile.email (class="form-control form-control-sm mt-0.5 ")}}
+                            {% endif %}
+                        </div>
+                        
+                    </fieldset>
+                    {{form_profile.button_submit_edit_profile (class="btn btn-outline-dark btn-sm mt-2")}}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

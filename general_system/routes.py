@@ -9,7 +9,7 @@ Ps: current_user is not used in this module. But it is necessary import it to us
 
 from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
-from general_system.forms import FormCreateAccount, FormLogin
+from general_system.forms import FormCreateAccount, FormLogin, FormEditProfile
 from general_system.models import Usuario
 from flask_login import login_user, logout_user, current_user, login_required
 
@@ -76,6 +76,25 @@ def logout():
 def my_profile():
     image_id = url_for('static', filename='photo_profile/{}'.format(current_user.perf_photo))
     return render_template('my_profile.html', image_id=image_id)
+
+
+@app.route("/my_profile/edit_profile", methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form_profile = FormEditProfile()
+    image_id = url_for('static', filename='photo_profile/{}'.format(current_user.perf_photo))
+    # Changing email or username
+    if form_profile.validate_on_submit():
+        current_user.username = form_profile.username.data
+        current_user.email = form_profile.email.data
+        data_base.session.commit()
+        flash(f'Edição feita com sucesso', 'alert-success')
+        return redirect(url_for('my_profile'))
+    # Automatic fill in the forms.
+    elif request.method == 'GET':
+        form_profile.username.data = current_user.username
+        form_profile.email.data = current_user.email
+    return render_template('edit_profile.html', image_id=image_id, form_profile=form_profile)
 
 
 @app.route("/post/create")
