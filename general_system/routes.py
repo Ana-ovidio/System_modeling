@@ -7,11 +7,14 @@ Ps: current_user is not used in this module. But it is necessary import it to us
 
 """
 
+import secrets
+import os
 from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
 from general_system.forms import FormCreateAccount, FormLogin, FormEditProfile
 from general_system.models import Usuario
 from flask_login import login_user, logout_user, current_user, login_required
+from PIL import Image
 
 set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
 
@@ -74,9 +77,30 @@ def logout():
 @app.route("/my_profile")
 @login_required
 def my_profile():
-    image_id = url_for('static', filename='photo_profile/{}'.format(current_user.perf_photo))
+    image_id = url_for('static', filename='image_id_user/{}'.format(current_user.perf_photo))
     return render_template('my_profile.html', image_id=image_id)
 
+
+def save_image_profile(image_profile):
+    # code of image
+    code_img = secrets.token_hex(8)
+    # filename = name of the image with the extension
+    # separate the name of the extension
+    name_img, extension_img = os.path.splitext(image_profile.filename)
+
+    # group name+code+extension
+    name_file = name_img + code_img + extension_img
+
+    # complete_path to save file in the images directory
+    all_path = os.path.join(app.root_path, 'static/image_id_user', name_file)
+
+    # Reduce the px of image and save image in the directory
+    length = (400, 400)
+    reduced_image = Image.open(image_profile)
+    reduced_image.thumbnail(length)
+    reduced_image.save(all_path)
+
+    return name_file
 
 @app.route("/my_profile/edit_profile", methods=['GET', 'POST'])
 @login_required
@@ -87,6 +111,9 @@ def edit_profile():
     if form_profile.validate_on_submit():
         current_user.username = form_profile.username.data
         current_user.email = form_profile.email.data
+        if form_profile.photo_profile.data:
+            name_file = save_image_profile(form_profile.photo_profile.data)
+            current_user.perf_photo = name_file
         data_base.session.commit()
         flash(f'Edição feita com sucesso', 'alert-success')
         return redirect(url_for('my_profile'))
