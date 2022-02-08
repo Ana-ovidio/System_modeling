@@ -102,6 +102,17 @@ def save_image_profile(image_profile):
 
     return name_file
 
+
+def current_courses(form_profile):
+    list_courses = []
+    # Add the text from the label field for the courses.
+    for field_form in form_profile:
+        if 'course_' in field_form.name:
+            if field_form.data:
+                list_courses.append(field_form.label.text)
+    return ';'.join(list_courses)
+
+
 @app.route("/my_profile/edit_profile", methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -114,6 +125,8 @@ def edit_profile():
         if form_profile.photo_profile.data:
             name_file = save_image_profile(form_profile.photo_profile.data)
             current_user.perf_photo = name_file
+        current_user.courses = current_courses(form_profile)
+
         data_base.session.commit()
         flash(f'Edição feita com sucesso', 'alert-success')
         return redirect(url_for('my_profile'))

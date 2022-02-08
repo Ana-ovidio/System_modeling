@@ -14,7 +14,7 @@ class Usuario(data_base.Model, UserMixin):
     password = data_base.Column(data_base.String, nullable=False)
     perf_photo = data_base.Column(data_base.String, default='default.jpg')
     posts = data_base.relationship('Post', backref='autor', lazy=True)
-    courses = data_base.Column(data_base.String, nullable=False, default='Não Informado')
+    courses = data_base.Column(data_base.String, nullable=False, default='')
 
 
 class Post(data_base.Model):

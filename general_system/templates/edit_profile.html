@@ -2,12 +2,11 @@
 
 {% block form_edit_profile%}
 
-    <div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
         <hr>
         <div class="row">
-
             <div class="col">
-                <form method="POST" action="" class="border p-3 m-5" enctype="multipart/form-data">
+                <form method="POST" action="" class="border p-4 mt-2" enctype="multipart/form-data">
                     {{form_profile.csrf_token}}
                     <legend><strong>Editar perfil</strong></legend>
                     <fieldset>
@@ -48,12 +47,24 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-                        
+
+                        <hr>
+                        <p><strong> Cursos: </strong></p>
+                        {% for field_form in form_profile%}
+                            {% if 'course_' in field_form.name %}
+                                <div class = 'form-group'>
+                                    {{field_form(class="form-check-input ")}}
+                                    {{field_form.label(class="form-check-label")}}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
                     </fieldset>
                     {{form_profile.button_submit_edit_profile (class="btn btn-outline-dark btn-sm mt-2")}}
                 </form>
             </div>
         </div>
     </div>
+
 
 {% endblock %}
