@@ -16,8 +16,6 @@ from general_system.models import Usuario
 from flask_login import login_user, logout_user, current_user, login_required
 from PIL import Image
 
-set_users = ['Ana', 'Bruna', 'Larissa', 'Sofia', 'Maria Eduarda', 'Maria Clara']
-
 
 @app.route("/")
 def home():
@@ -32,6 +30,7 @@ def contacts():
 @app.route("/users")
 @login_required
 def users():
+    set_users = Usuario.query.all()
     return render_template('users.html', set_users=set_users)
 
 
