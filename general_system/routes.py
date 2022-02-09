@@ -148,3 +148,28 @@ def create_post():
         flash(f'Post criado com sucesso!', 'alert-success')
         return redirect(url_for('home'))
     return render_template('create_posts.html', form_post=form_post)
+
+
+@app.route('/expose_post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def expose_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.autor:
+        form_edit_post = FormCreatePost()
+        # Automatic fill in the forms.
+        if request.method == 'GET':
+            form_edit_post.title.data = post.title
+            form_edit_post.bory_text.data = post.bory_text
+        # Contrary of the above struct.
+        # The user will fill the fields.
+        elif form_edit_post.validate_on_submit():
+            post.title = form_edit_post.title.data
+            post.bory_text = form_edit_post.bory_text.data
+            # Save in the base data.
+            data_base.session.commit()
+            flash(f'Post editado com sucesso!', 'alert-success')
+            return redirect(url_for('home'))
+    else:
+        form_edit_post = None
+
+    return render_template('expose_post.html', post=post, form_post=form_edit_post)

@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="col col-9">
-                    <h3><strong> {{ post.title }}</strong></h3>
+                    <a style="text-decoration: none" href="{{ url_for('expose_post', post_id=post.id) }}"><h3><strong> {{ post.title }}</strong></h3></a>
                     <p>{{ post.bory_text }}</p>
                 </div>
 
