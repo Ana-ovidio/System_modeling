@@ -54,7 +54,11 @@ def register_login():
         if usuario and bcrypt.check_password_hash(usuario.password, form_login.password.data):
             login_user(usuario, remember=form_login.remember_password.data)
             flash(f'Login feito com sucesso no e-mail: {form_login.email.data}', 'alert-success')
+
             # Cath a specific parameter in the url
+            # Always that a person non logged try accessing a restrict page, the program redirect to this function
+            # Later, the under conditional verify what was the page that the user try to enter.
+
             next_parameter = request.args.get('next')
             if next_parameter:
                 return redirect(next_parameter)
