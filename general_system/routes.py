@@ -19,7 +19,8 @@ from PIL import Image
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    posts = Post.query.order_by(Post.id.desc())
+    return render_template('home.html', posts=posts)
 
 
 @app.route("/contacts")
@@ -116,7 +117,7 @@ def current_courses(form_profile):
 @login_required
 def edit_profile():
     form_profile = FormEditProfile()
-    image_id = url_for('static', filename='photo_profile/{}'.format(current_user.perf_photo))
+    image_id = url_for('static', filename='image_id_user/{}'.format(current_user.perf_photo))
     # Changing email or username
     if form_profile.validate_on_submit():
         current_user.username = form_profile.username.data

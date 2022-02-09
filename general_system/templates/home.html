@@ -1,9 +1,36 @@
 {% extends 'base.html' %}
 
 {% block bory %}
-    <div class="container">
+    <div class="container mt-3">
+        <h1 style="color: midnightblue"><strong><font size="5">Comunidade da Engenharia Computacional - UFJF</font></strong></h1>
+        <h2 style="color: darkcyan"><font size="4">Integração entre alunos, professores e TEAs</font></h2>
+        <hr>
 
-    Meu primeiro site está no ar, testando html + base fixa
+        {% for post in posts %}
+
+            <div class="row border mt-4 p-2 publications">
+                <div class="col col-2">
+                    <div class="image pe-3 "> <img src="{{url_for('static', filename='image_id_user/{}'.format(post.autor.perf_photo))}}" class="rounded" width="170"> </div>
+                    <strong>{{ post.autor.username }}</strong>
+                    <div class="row justify-content-center">
+                        {% if 'Não Informado' in post.autor.courses or post.autor.courses == '' %}
+                            <button type="button" class="btn btn-sm btn-light mt-2" disabled>Usuário não matriculado em algum curso.</button>
+                        {% else %}
+                            {% for course in post.autor.courses.split(';') %}
+                                 <button type="button" class="btn btn-sm btn-dark mt-2" disabled>{{ course }}</button>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="col col-9">
+                    <h3><strong> {{ post.title }}</strong></h3>
+                    <p>{{ post.bory_text }}</p>
+                </div>
+
+            </div>
+
+        {% endfor %}
 
     </div>
 {% endblock %}
