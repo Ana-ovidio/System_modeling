@@ -53,7 +53,7 @@
                         {% for field_form in form_profile%}
                             {% if 'course_' in field_form.name %}
                                 <div class = 'form-group'>
-                                    {{field_form(class="form-check-input ")}}
+                                    {{field_form(class="form-check-input")}}
                                     {{field_form.label(class="form-check-label")}}
                                 </div>
                             {% endif %}

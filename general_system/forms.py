@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 # Associated with fields
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 # Restriction of same fields to users
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from general_system.models import Usuario
@@ -34,14 +34,13 @@ class FormEditProfile(FlaskForm):
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     error_message = 'Extensão inválida, insira com jpeg, jpg ou png.'
     photo_profile = FileField('Atualizar foto de perfil: ', validators=[FileAllowed(['jpg', 'png', 'jpeg'],
-                                                                                    message= error_message)])
+                                                                                    message=error_message)])
     course_algorithms = BooleanField('Disciplina de Algoritimos')
     course_data_struct = BooleanField('Disciplina de Estrutura de dados')
     course_resistance_materials = BooleanField('Disciplina de Resistência dos materiais')
     course_modeling_system = BooleanField('Disciplina de Modelagem de sistemas')
     course_graphs = BooleanField('Disciplina de Grafos')
     course_conclusion_course = BooleanField('Disciplina de TCC 1')
-
 
     button_submit_edit_profile = SubmitField('Confirmar Edição')
 
@@ -50,3 +49,9 @@ class FormEditProfile(FlaskForm):
             usuario = Usuario.query.filter_by(email=email.data).first()
             if usuario:
                 raise ValidationError('E-mail já cadastrado. Por gentileza, inclua outro email.')
+
+
+class FormCreatePost (FlaskForm):
+    title = StringField('Título do post', validators=[DataRequired(),Length(2, 140)])
+    bory_text = TextAreaField('Escreva seu post aqui: ', validators=[DataRequired()])
+    button_submit_create_post = SubmitField('Criar Post')

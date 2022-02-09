@@ -11,8 +11,8 @@ import secrets
 import os
 from flask import render_template, request, flash, redirect, url_for
 from general_system import app, data_base, bcrypt
-from general_system.forms import FormCreateAccount, FormLogin, FormEditProfile
-from general_system.models import Usuario
+from general_system.forms import FormCreateAccount, FormLogin, FormEditProfile, FormCreatePost
+from general_system.models import Usuario, Post
 from flask_login import login_user, logout_user, current_user, login_required
 from PIL import Image
 
@@ -60,7 +60,7 @@ def register_login():
             else:
                 return redirect(url_for('home'))
         else:
-            flash(f'Falha no Login. E-mail ou Senha Incorretos', 'alert-danger')
+            flash(f'Falha no Login. E-mail ou Senha Incorretos.', 'alert-danger')
 
     return render_template('register_login.html', form_account=form_account, form_login=form_login)
 
@@ -69,7 +69,7 @@ def register_login():
 @login_required
 def logout():
     logout_user()
-    flash(f'Logout realizado com sucesso', 'alert-success')
+    flash(f'Logout realizado com sucesso!', 'alert-success')
     return redirect(url_for('home'))
 
 
@@ -127,7 +127,7 @@ def edit_profile():
         current_user.courses = current_courses(form_profile)
 
         data_base.session.commit()
-        flash(f'Edição feita com sucesso', 'alert-success')
+        flash(f'Edição feita com sucesso!', 'alert-success')
         return redirect(url_for('my_profile'))
     # Automatic fill in the forms.
     elif request.method == 'GET':
@@ -136,7 +136,14 @@ def edit_profile():
     return render_template('edit_profile.html', image_id=image_id, form_profile=form_profile)
 
 
-@app.route("/post/create")
+@app.route("/post/create", methods=['GET', 'POST'])
 @login_required
 def create_post():
-    return render_template('create_posts.html')
+    form_post = FormCreatePost()
+    if form_post.validate_on_submit():
+        post = Post(title=form_post.title.data, bory_text=form_post.bory_text.data, id_user=current_user)
+        data_base.session.add(post)
+        data_base.session.commit()
+        flash(f'Post criado com sucesso!', 'alert-success')
+        return redirect(url_for('home'))
+    return render_template('create_posts.html', form_post=form_post)
