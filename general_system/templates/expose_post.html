@@ -25,7 +25,7 @@
 
                         {%if form_post %}
                            -- <a style="text-decoration: none" href="#form_editpost">Editar post</a>
-                            / <a style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#DeletePost">Excluir Post</a>
+                            / <a class="text-danger" style="text-decoration: none" href="#" data-bs-toggle="modal" data-bs-target="#DeletePost">Excluir Post</a>
                         {% endif %}
                     </small>
 
@@ -87,15 +87,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Excluir Post</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        Deseja realmente excluir este post? Tal ação não pode ser desfeita!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-dark">Save changes</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+          <form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}">
+            <button type="submit" class="btn btn-danger">Excluir Post</button>
+          </form>
       </div>
     </div>
   </div>

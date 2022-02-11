@@ -7,6 +7,7 @@ from flask_login import UserMixin
 def load_user(id_user):
     return Usuario.query.get(int(id_user))
 
+
 class Usuario(data_base.Model, UserMixin):
     id = data_base.Column(data_base.Integer, primary_key=True)
     username = data_base.Column(data_base.String, nullable=False)
@@ -15,6 +16,9 @@ class Usuario(data_base.Model, UserMixin):
     perf_photo = data_base.Column(data_base.String, default='default.jpg')
     posts = data_base.relationship('Post', backref='autor', lazy=True)
     courses = data_base.Column(data_base.String, nullable=False, default='')
+
+    def count_posts(self):
+        return len(self.posts)
 
 
 class Post(data_base.Model):

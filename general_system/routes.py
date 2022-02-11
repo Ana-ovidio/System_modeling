@@ -9,7 +9,7 @@ Ps: current_user is not used in this module. But it is necessary import it to us
 
 import secrets
 import os
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, abort
 from general_system import app, data_base, bcrypt
 from general_system.forms import FormCreateAccount, FormLogin, FormEditProfile, FormCreatePost
 from general_system.models import Usuario, Post
@@ -177,3 +177,17 @@ def expose_post(post_id):
         form_edit_post = None
 
     return render_template('expose_post.html', post=post, form_post=form_edit_post)
+
+
+
+@app.route('/expose_post/<post_id>/delete', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.autor:
+        data_base.session.delete(post)
+        data_base.session.commit()
+        flash(f'Post excluido com sucesso', 'alert-warning')
+        return redirect(url_for('home'))
+    else:
+        abort(403)

@@ -2,8 +2,10 @@
 
 {% block bory %}
     <div class="container">
-        <h1><font size="+2"><strong>Pessoas matriculadas no curso</strong></font></h1>
+        <div align="center">
+        <h1 style="color: midnightblue"><strong><font size="5">COMUNIDADE</font></strong></h1>
         <hr>
+        </div>
         {% for user in set_users %}
             <div class="container mt-5 d-flex justify-content-center">
                 <div class="card p-3">
@@ -17,7 +19,7 @@
                                 {% else %}
                                     <div class="d-flex flex-column"> <span class="articles">Cursos</span> <span class="number1">{{user.courses.count(';') + 1}}</span> </div>
                                 {% endif %}
-                                <div class="d-flex flex-column"> <span class="rating">Posts</span> <span class="number3">0</span> </div>
+                                <div class="d-flex flex-column"> <span class="rating">Posts</span> <span class="number3">{{user.count_posts()}}</span> </div>
                             </div>
                         </div>
                     </div>
