@@ -32,8 +32,8 @@ class FormLogin(FlaskForm):
 class FormEditProfile(FlaskForm):
     username = StringField('Nome de usuário:', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
-    error_message = 'Extensão inválida, insira com jpeg, jpg ou png.'
-    photo_profile = FileField('Atualizar foto de perfil: ', validators=[FileAllowed(['jpg', 'png', 'jpeg'],
+    error_message = 'Extensão inválida, insira com jpeg, jpg, jfif ou png.'
+    photo_profile = FileField('Atualizar foto de perfil: ', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'jfif' ],
                                                                                     message=error_message)])
     course_algorithms = BooleanField('Disciplina de Algoritimos')
     course_data_struct = BooleanField('Disciplina de Estrutura de dados')

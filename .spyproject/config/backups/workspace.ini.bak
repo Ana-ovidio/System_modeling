@@ -1,0 +1,10 @@
+[workspace]
+restore_data_on_startup = True
+save_data_on_exit = True
+save_history = True
+save_non_project_files = False
+
+[main]
+version = 0.2.0
+recent_files = ['..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\source\\utils\\iterative_drops.py', '..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\source\\utils\\alarm.py', '..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\main.py', '..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\source\\model\\dynamic.py', '..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\source\\model\\estimation.py', '..\\..\\Bolsas-Projetos\\Projeto-Empiricus\\input.txt']
+
