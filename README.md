@@ -1,6 +1,22 @@
-# **System Modeling**
+# ***System Modeling***
 
-## Requisitos
+##
+
+### **Requisitos**
+
+ 1- Baixar uma IDE associada ao Python. Aconselha- se baixar o Pycharm. 
+ 
+ 2- Na past onde está instalado o Pycharm, fazer a instalação do PIP no terminal.
+ 
+            ... > python.exe install pip 
+            
+ 3- No terminal do Pycham, realizar as instalações dos pacotes inseridos no 'requeriments.txt'
+
+##
+
+## ** Criação de um ambiente virtual (não é necessário caso esteja fazendo um clone deste terminal)
+
+Prompt do Anaconda:
 
 - Crie um ambiente utilizando o conda
 
@@ -22,7 +38,7 @@
 
 --------
 
-Modelagem de sistemas através da criação de um site. 
+## **Modelagem de sistemas através da criação de um site** 
 
 O projeto será construido através de dois métodos:
 
@@ -33,9 +49,9 @@ O intuito será realizar uma integração com o banco de dados, na qual os usuá
 
 ---------
 
-### Comandos necessários para o banco de dados. 
+### Comandos necessários para a visualização do banco de dados. 
 
-** No Python Console:**
+** No Python Console**
 
                   from general_system import data_base
                   from general_system.models import Ususario
