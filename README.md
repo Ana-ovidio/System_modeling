@@ -14,7 +14,7 @@
 
 ##
 
-## ** Criação de um ambiente virtual (não é necessário caso esteja fazendo um clone deste terminal)
+### **Criação de um ambiente virtual (não é necessário caso esteja fazendo um clone deste terminal)**
 
 Prompt do Anaconda:
 
@@ -38,7 +38,7 @@ Prompt do Anaconda:
 
 --------
 
-## **Modelagem de sistemas através da criação de um site** 
+### **Modelagem de sistemas através da criação de um site** 
 
 O projeto será construido através de dois métodos:
 
