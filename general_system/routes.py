@@ -3,8 +3,6 @@ home, contacts, users - Associated with the main pages. These functions are stat
 register_login - Associated with pages if the user is not logged in the site.
 logout, my_profile, create_posts - Associated with restrict pages. A person just access if it has done the login.
 
-Ps: current_user is not used in this module. But it is necessary import it to use in the navbar.
-
 """
 
 import secrets
