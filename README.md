@@ -51,7 +51,7 @@ O intuito será realizar uma integração com o banco de dados, na qual os usuá
 
 ### Comandos necessários para a visualização do banco de dados. 
 
-** No Python Console**
+** No Python Console **
 
                   from general_system import data_base
                   from general_system.models import Ususario
