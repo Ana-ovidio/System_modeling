@@ -177,7 +177,6 @@ def expose_post(post_id):
     return render_template('expose_post.html', post=post, form_post=form_edit_post)
 
 
-
 @app.route('/expose_post/<post_id>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_post(post_id):
